@@ -1,0 +1,1 @@
+{"message":"Customer '1' was not found!","developerHint":"Please take a look at hypermedia information in the previous data response. You probably received a reference to the resource there.","logId":"7625d87e-8764-4ea7-abed-0529746189cd","httpStatusCode":404,"logTime":"2015-01-14T08:44:16"}

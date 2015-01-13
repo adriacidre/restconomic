@@ -1,0 +1,1 @@
+{"message":"Unauthorized access (Unauthorized).","developerHint":"Please take a look at https://restapi.e-conomic.com, and follow the links to help on authorization, or use the word demo for both tokens.","logId":"0c5af47a-39fd-4802-a268-5c452d6fd27c","httpStatusCode":401,"demoLink":"https://restapi.e-conomic.com/accounts/1?demo=true","logTime":"2015-01-13T16:57:53"}
