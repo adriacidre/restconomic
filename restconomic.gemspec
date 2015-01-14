@@ -17,10 +17,9 @@ Gem::Specification.new do |s|
   s.license       = 'MIT'
 
   s.add_development_dependency('rspec', '~> 2.4')
-  s.add_development_dependency('webmock')
-  s.add_dependency('restclient')
-  s.add_dependency('rubygems')
-  s.add_dependency('json')
+  s.add_development_dependency('webmock', '~> 10.20')
+  s.add_dependency('restclient', '~> 0.10')
+  s.add_dependency('json', '~> 1.8')
 
   s.required_ruby_version = '>= 1.9.3'
 end
