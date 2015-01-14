@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Restconomic::Accounts do
 
+  let!(:subject)  { Restconomic::Session.new('a', 'b') }
   let!(:entity)   { 'accounts' }
 
   describe 'all' do
@@ -9,11 +10,11 @@ describe Restconomic::Accounts do
     before     { mock_request('get', url, entity, 'all') }
 
     it 'Should return built in objects' do
-      expect(Restconomic::Accounts.all.count).eql? 20
+      expect(subject.accounts.all.count).eql? 20
     end
 
     it 'Should correctly populate each property' do
-      account = Restconomic::Accounts.all.first
+      account = subject.accounts.all.first
 
       expect(account.account_number).eql? 1000
       expect(account.account_type).eql? 'heading'
@@ -31,7 +32,7 @@ describe Restconomic::Accounts do
     before     { mock_request('get', url, entity, 'find') }
 
     it 'Should correctly populate each property' do
-      account = Restconomic::Accounts.find(id)
+      account = subject.accounts.find(id)
 
       expect(account.account_number).eql? id
       expect(account.account_type).eql? 'heading'
@@ -50,7 +51,7 @@ describe Restconomic::Accounts do
     before     { mock_request('get', url, entity, 'not_found') }
 
     it 'Should correctly populate each property' do
-      expect(Restconomic::Accounts.find(id)).eql? nil
+      expect(subject.accounts.find(id)).eql? nil
     end
   end
 

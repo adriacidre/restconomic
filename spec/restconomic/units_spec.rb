@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Restconomic::Units do
 
+  let!(:subject)  { Restconomic::Session.new('a', 'b') }
   let!(:entity)   { 'units' }
 
   describe 'all' do
@@ -9,11 +10,11 @@ describe Restconomic::Units do
     before     { mock_request('get', url, entity, 'all') }
 
     it 'Should return built in objects' do
-      expect(Restconomic::Units.all.count).eql? 20
+      expect(subject.units.all.count).eql? 20
     end
 
     it 'Should correctly populate each property' do
-      unit = Restconomic::Units.all.first
+      unit = subject.units.all.first
 
       expect(unit.unit_number).eql? 1000
     end
@@ -25,7 +26,7 @@ describe Restconomic::Units do
     before     { mock_request('get', url, entity, 'find') }
 
     it 'Should correctly populate each property' do
-      unit = Restconomic::Units.find(id)
+      unit = subject.units.find(id)
 
       expect(unit.unit_number).eql? 1000
     end
@@ -38,7 +39,7 @@ describe Restconomic::Units do
     before     { mock_request('get', url, entity, 'not_found') }
 
     it 'Should correctly populate each property' do
-      expect(Restconomic::Units.find(id)).eql? nil
+      expect(subject.units.find(id)).eql? nil
     end
   end
 

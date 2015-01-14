@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Restconomic::Customers do
 
+  let!(:subject)  { Restconomic::Session.new('a', 'b') }
   let!(:entity)   { 'customers' }
 
   describe 'all' do
@@ -9,11 +10,11 @@ describe Restconomic::Customers do
     before     { mock_request('get', url, entity, 'all') }
 
     it 'Should return built in objects' do
-      expect(Restconomic::Customers.all.count).eql? 20
+      expect(subject.customers.all.count).eql? 20
     end
 
     it 'Should correctly populate each property' do
-      customer = Restconomic::Customers.all.first
+      customer = subject.customers.all.first
 
       expect(customer.address).eql? "1 Data Street"
       expect(customer.attention.kind_of?(Array)).eql? true
@@ -44,7 +45,7 @@ describe Restconomic::Customers do
     before     { mock_request('get', url, entity, 'find') }
 
     it 'Should correctly populate each property' do
-      customer = Restconomic::Customers.find(id)
+      customer = subject.customers.find(id)
 
       expect(customer.address).eql? "1 Data Street"
       expect(customer.attention.kind_of?(Array)).eql? true
@@ -76,7 +77,7 @@ describe Restconomic::Customers do
     before     { mock_request('get', url, entity, 'not_found') }
 
     it 'Should correctly populate each property' do
-      expect(Restconomic::Customers.find(id)).eql? nil
+      expect(subject.customers.find(id)).eql? nil
     end
   end
 

@@ -14,17 +14,10 @@ If you're looking for a SOAP wrapper you can find it on https://github.com/lokal
 ##Usage example
 
 ```ruby
-  accounts = Restconomic::Accounts.all
+  session = Restconomic::Session.new('appid', 'accessid')
+  accounts = session.accounts.all
   account_number = accounts.first.account_number
-  account = Restconomic::Accounts.find(account_number)
-```
-
-##Setting up your credentials
-
-You'll need to setup your credentials on environment variables
-```sh
-ECONOMIC_ACCESS_ID = "your access id"
-ECONOMIC_APP_ID = "your app id"
+  account = session.accounts.find(account_number)
 ```
 
 ##Limitations

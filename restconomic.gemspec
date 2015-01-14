@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency('rspec', '~> 2.4')
   s.add_development_dependency('webmock', '~> 10.20')
-  s.add_dependency('restclient', '~> 0.10')
+  s.add_dependency('rest-client', '~>  1.6')
   s.add_dependency('json', '~> 1.8')
 
   s.required_ruby_version = '>= 1.9.3'

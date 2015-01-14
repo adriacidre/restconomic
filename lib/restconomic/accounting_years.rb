@@ -2,7 +2,7 @@ require_relative 'entity'
 
 module Restconomic
   class AccountingYears < Entity
-    def self.find(number)
+    def find(number)
       raise 'Invalid method'
     end
   end

@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Restconomic::Products do
 
+  let!(:subject)  { Restconomic::Session.new('a', 'b') }
   let!(:entity)   { 'products' }
 
   describe 'all' do
@@ -9,11 +10,11 @@ describe Restconomic::Products do
     before     { mock_request('get', url, entity, 'all') }
 
     it 'Should return built in objects' do
-      expect(Restconomic::Products.all.count).eql? 20
+      expect(subject.products.all.count).eql? 20
     end
 
     it 'Should correctly populate each property' do
-      product = Restconomic::Products.all.first
+      product = subject.products.all.first
 
       expect(product.barred).eql? false
       expect(product.cost_price).eql? 0.0
@@ -34,7 +35,7 @@ describe Restconomic::Products do
     before     { mock_request('get', url, entity, 'find') }
 
     it 'Should correctly populate each property' do
-      product = Restconomic::Products.find(id)
+      product = subject.products.find(id)
 
       expect(product.barred).eql? false
       expect(product.cost_price).eql? 0.0
@@ -56,7 +57,7 @@ describe Restconomic::Products do
     before     { mock_request('get', url, entity, 'not_found') }
 
     it 'Should correctly populate each property' do
-      expect(Restconomic::Products.find(id)).eql? nil
+      expect(subject.products.find(id)).eql? nil
     end
   end
 

@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Restconomic::InvoicesBooked do
 
+  let!(:subject)  { Restconomic::Session.new('a', 'b') }
   let!(:entity)   { 'invoices_booked' }
   let!(:url_path) { 'invoices/booked' }
 
@@ -10,11 +11,11 @@ describe Restconomic::InvoicesBooked do
     before     { mock_request('get', url, entity, 'all') }
 
     it 'Should return built in objects' do
-      expect(Restconomic::InvoicesBooked.all.count).eql? 20
+      expect(subject.invoices_booked.all.count).eql? 20
     end
 
     it 'Should correctly populate each property' do
-      invoice = Restconomic::InvoicesBooked.all.first
+      invoice = subject.invoices_booked.all.first
 
       expect(invoice.currency).eql? "GBP"
       expect(invoice.customer.kind_of?(Array)).eql? true

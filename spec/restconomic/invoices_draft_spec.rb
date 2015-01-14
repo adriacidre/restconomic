@@ -2,19 +2,20 @@ require 'spec_helper'
 
 describe Restconomic::InvoicesDraft do
 
+  let!(:subject)  { Restconomic::Session.new('a', 'b') }
   let!(:entity)   { 'invoices_draft' }
-  let!(:url_path) { 'invoices-draft' }
+  let!(:url_path) { 'invoices/draft' }
 
   describe 'all' do
     let!(:url) { "#{Restconomic::Entity::BASE_URL}/#{url_path}" }
     before     { mock_request('get', url, entity, 'all') }
 
     it 'Should return built in objects' do
-      expect(Restconomic::InvoicesDraft.all.count).eql? 20
+      expect(subject.invoices_draft.all.count).eql? 20
     end
 
     it 'Should correctly populate each property' do
-      invoice = Restconomic::InvoicesDraft.all.first
+      invoice = subject.invoices_draft.all.first
 
       expect(invoice.currency).eql? "GBP"
       expect(invoice.customer.kind_of?(Array)).eql? true

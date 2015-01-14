@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Restconomic::Suppliers do
 
+  let!(:subject)  { Restconomic::Session.new('a', 'b') }
   let!(:entity) { 'suppliers' }
 
   describe 'all' do
@@ -9,11 +10,11 @@ describe Restconomic::Suppliers do
     before     { mock_request('get', url, entity, 'all') }
 
     it 'Should return built in objects' do
-      expect(Restconomic::Suppliers.all.count).eql? 20
+      expect(subject.suppliers.all.count).eql? 20
     end
 
     it 'Should correctly populate each property' do
-      supplier = Restconomic::Suppliers.all.first
+      supplier = subject.suppliers.all.first
 
       expect(supplier.contacts).eql? "https://restapi.e-conomic.com/suppliers/101/contacts?demo=true"
       expect(supplier.corporate_identification_number).eql? "12345678"
@@ -33,7 +34,7 @@ describe Restconomic::Suppliers do
     before     { mock_request('get', url, entity, 'find') }
 
     it 'Should correctly populate each property' do
-      supplier = Restconomic::Suppliers.find(id)
+      supplier = subject.suppliers.find(id)
 
       expect(supplier.contacts).eql? "https://restapi.e-conomic.com/suppliers/101/contacts?demo=true"
       expect(supplier.corporate_identification_number).eql? "12345678"
@@ -54,7 +55,7 @@ describe Restconomic::Suppliers do
     before     { mock_request('get', url, entity, 'not_found') }
 
     it 'Should correctly populate each property' do
-      expect(Restconomic::Suppliers.find(id)).eql? nil
+      expect(subject.suppliers.find(id)).eql? nil
     end
   end
 

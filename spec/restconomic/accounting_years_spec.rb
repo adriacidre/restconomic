@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Restconomic::Accounts do
 
+  let!(:subject)  { Restconomic::Session.new('a', 'b') }
   let!(:entity)   { 'accounting_years' }
   let!(:url_path) { 'accounting-years' }
 
@@ -10,11 +11,11 @@ describe Restconomic::Accounts do
     before     { mock_request('get', url, entity, 'all') }
 
     it 'Should return built in objects' do
-      expect(Restconomic::AccountingYears.all.count).eql? 20
+      expect(subject.accounting_years.all.count).eql? 20
     end
 
     it 'Should correctly populate each property' do
-      accounting_years = Restconomic::AccountingYears.all.first
+      accounting_years = subject.accounting_years.all.first
 
       expect(accounting_years.closed).eql? true
       expect(accounting_years.entries).eql? "https://restapi.e-conomic.com/accounting-years/2006/entries?demo=true"
