@@ -3,6 +3,14 @@ module Restconomic
     BASE_URL = 'https://restapi.e-conomic.com/'
     @pagesize = 20
 
+    def initialize(fields = {})
+      fields.each do |key, value|
+        key = Restconomic::Entity.underscore(key)
+        self.instance_variable_set("@#{key}", value)
+        self.class.__send__(:attr_accessor, key)
+      end
+    end
+
     def self.all(page = 0)
       url    = "#{BASE_URL}#{base_path}"
       params = { skippages: page, pagesize: @pagesize, headers: headers}
@@ -20,23 +28,13 @@ module Restconomic
         if items.has_key? 'collection'
           response = []
           items['collection'].each do |item|
-            response << map_object(item)
+            response << self.new(item)
           end
         else
           return if items['httpStatusCode'] == 401
-          response = map_object items
+          response = self.new(items)
         end
         response
-      end
-
-      def self.map_object(item)
-        object = self.new
-        item.each do |key, value|
-          key = underscore(key)
-          object.instance_variable_set("@#{key}", value)
-          object.class.__send__(:attr_accessor, key)
-        end
-        object
       end
 
       def self.request(method, url, params = {})
