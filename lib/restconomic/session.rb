@@ -41,6 +41,10 @@ module Restconomic
       Restconomic::Units.new(self)
     end
 
+    def company
+      Restconomic::Company.new(self)
+    end
+
     def request(method, url, params = {})
       params = headers.merge(params)
       RestClient.send(method, url, params)

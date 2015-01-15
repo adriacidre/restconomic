@@ -11,5 +11,7 @@ require_relative 'restconomic/suppliers'
 require_relative 'restconomic/units'
 require_relative 'restconomic/session'
 
+require_relative 'restconomic/company'
+
 module Restconomic
 end
