@@ -6,7 +6,7 @@ describe Restconomic::Accounts do
   let!(:entity)   { 'accounts' }
 
   describe 'all' do
-    let!(:url) { "#{Restconomic::Entity::BASE_URL}/#{entity}" }
+    let!(:url) { "#{Restconomic::Entity::BASE_URL}/#{entity}?skippages=0" }
     before     { mock_request('get', url, entity, 'all') }
 
     it 'Should return built in objects' do

@@ -16,7 +16,7 @@ module Restconomic
 
     def get
       url = "#{BASE_URL}#{base_path}"
-      map @session.request :get, url
+      map @session.get url
     end
   end
 end

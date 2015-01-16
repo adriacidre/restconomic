@@ -7,7 +7,7 @@ describe Restconomic::Accounts do
   let!(:url_path) { 'accounting-years' }
 
   describe 'all' do
-    let!(:url) { "#{Restconomic::Entity::BASE_URL}/#{url_path}" }
+    let!(:url) { "#{Restconomic::Entity::BASE_URL}/#{url_path}?skippages=0" }
     before     { mock_request('get', url, entity, 'all') }
 
     it 'Should return built in objects' do

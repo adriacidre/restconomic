@@ -1,7 +1,6 @@
 module Restconomic
   class Entity
     BASE_URL = 'https://restapi.e-conomic.com/'
-    @pagesize = 20
 
     def initialize(session, fields = {})
       @session = session
@@ -12,15 +11,16 @@ module Restconomic
       end
     end
 
-    def all(page = 0)
+    def all(page = 0, size = nil)
       url    = "#{BASE_URL}#{base_path}"
-      params = { skippages: page, pagesize: @pagesize }
-      map @session.request :get, url, params
+      params = { skippages: page }
+      params[:pagesize] = size unless size.nil?
+      map @session.get url, params
     end
 
     def find(number)
       url = "#{BASE_URL}#{base_path}/#{number}"
-      map @session.request :get, url
+      map @session.get url
     end
 
     private

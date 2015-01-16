@@ -45,9 +45,9 @@ module Restconomic
       Restconomic::Company.new(self)
     end
 
-    def request(method, url, params = {})
-      params = headers.merge(params)
-      RestClient.send(method, url, params)
+    def get(url, params = {})
+      params = URI.escape(params.collect{|k,v| "#{k}=#{v}"}.join('&'))
+      RestClient.get("#{url}?#{params}", headers)
     end
 
     def headers
